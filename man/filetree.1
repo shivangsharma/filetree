@@ -1,0 +1,92 @@
+.TH FILETREE 1 "August 2024" "1.0" "User Commands"
+.SH NAME
+filetree \- Validate a tab-indented file and create a directory structure.
+.SH SYNOPSIS
+.B filetree
+.RB [ \-file ] " <file_location>"
+.RB [ \-tdir ] " <directory>"
+.SH DESCRIPTION
+The \fBfiletree\fP script reads a tab-indented file that represents
+a directory tree structure and creates the corresponding directory hierarchy
+under a specified target directory. Each line in the input file represents a
+directory name, and its indentation level is represented by tab characters.
+
+The script checks the validity of the file format, ensures that directory names
+are valid for Linux systems, and creates the directories as specified.
+.SH OPTIONS
+.TP
+.B \-file <file_location>
+Specifies the location of the input file containing the directory tree structure.
+.TP
+.B \-tdir <directory>
+Specifies the target directory where the directory structure will be created.
+If the directory does not exist, it will be created.
+.SH FUNCTIONS
+.TP
+.B is_valid_filename
+Checks if a given string is a valid Linux filename. A valid filename:
+.IP \[bu] 2
+Does not contain a forward slash ('/').
+.IP \[bu] 2
+Does not contain control characters.
+.IP \[bu] 2
+Is not empty.
+.IP \[bu] 2
+Does not exceed 255 characters in length.
+.SH USAGE
+The script should be executed with two arguments: the location of the input file
+(\fB\-file\fP) and the target directory (\fB\-tdir\fP).
+.IP
+Example:
+.EX
+./create_structure -file filetree.txt -tdir /path/to/target_directory
+.EE
+.SH WORKFLOW
+.IP 1.
+The script reads command-line arguments to determine the input file and target directory.
+.IP 2.
+It checks if both arguments are provided. If not, it prints a usage message and exits.
+.IP 3.
+It verifies the existence of the input file and the target directory.
+.IP 4.
+If the input file does not exist, it exits with an error.
+.IP 5.
+If the target directory does not exist, it creates it.
+.IP 6.
+The script validates each line in the input file:
+.RS
+.IP \[bu] 2
+Ensures the indentation level increments correctly.
+.IP \[bu] 2
+Validates each folder name using the \fBis_valid_filename\fP function.
+.RE
+.IP 7.
+For each valid line, it creates the directory as specified by the indentation level.
+.IP 8.
+Upon completion, it prints that the directory structure and filenames are valid.
+.SH VALIDATION
+The script performs several validation checks:
+.IP \[bu] 2
+Validates the existence of the input file and target directory.
+.IP \[bu] 2
+Checks if the input file is formatted correctly, with indentation increasing
+by no more than one level at a time.
+.IP \[bu] 2
+Verifies that directory names do not contain invalid characters.
+.SH ERRORS
+The script exits with a message if:
+.IP \[bu] 2
+The input file does not exist.
+.IP \[bu] 2
+The target directory cannot be created.
+.IP \[bu] 2
+The input file contains invalid lines or directory names.
+.SH AUTHOR
+Written by User.
+.SH COPYRIGHT
+Copyright (C) 2024. All Rights Reserved.
+.SH SEE ALSO
+.BR bash (1),
+.BR mkdir (1),
+.BR sed (1),
+.BR awk (1)

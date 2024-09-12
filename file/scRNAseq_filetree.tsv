@@ -1,0 +1,17 @@
+literature/
+data/
+	raw/
+		original/
+		10X
+	processed/
+		author/
+		analyzed/
+code/
+results/
+	0_Explore
+	1_QC
+	2_Clustering
+	3_Annotation
+	4_Clustering
+	5_Trajectory
+	6_GRN
